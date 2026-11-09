@@ -1,0 +1,722 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Gampa Aravind Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Layout: dark navy SAP-console portfolio. Hero with orbiting FI modules, a live t-code command field band, then process, flow, skills, timeline, resume and contact. Single dark theme by choice. */
+:root {
+  --bg: #061029;
+  --bg2: #0a1a3f;
+  --surface: #0e2150;
+  --line: rgba(120, 165, 255, 0.22);
+  --fg: #e8efff;
+  --muted: #9db0d6;
+  --accent: #2f8bff;
+  --accent2: #62c0ff;
+  --glow: rgba(47, 139, 255, 0.35);
+  --ok: #3ddc97;
+  --warn: #ffc857;
+  --paper: #ffffff;
+  --ink: #0b1a3d;
+  --ink2: #3a4b72;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--bg); color: var(--fg);
+  font-family: var(--f-body); font-size: 16px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0; overflow-x: clip;
+}
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--bg); }
+a { color: inherit; }
+button { font-family: inherit; }
+:focus-visible { outline: 2px solid var(--accent2); outline-offset: 3px; border-radius: 4px; }
+.wrap { max-width: 1080px; margin: 0 auto; }
+h1, h2, h3 { font-family: var(--f-display); line-height: 1.05; margin: 0; text-wrap: balance; letter-spacing: -0.02em; }
+.eyebrow { font-family: var(--f-mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent2); }
+
+/* nav */
+nav {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: 12px 0; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+.prog { position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2)); transform-origin: left; transform: scaleX(0); box-shadow: 0 0 10px var(--glow); }
+.brand { display: flex; align-items: center; gap: 10px; font-family: var(--f-display); font-weight: 700; text-decoration: none; }
+.brand svg { width: 34px; height: 34px; }
+.links { display: flex; gap: 20px; font-size: 14px; color: var(--muted); }
+.links a { text-decoration: none; padding: 4px 0; border-bottom: 1px solid transparent; transition: color .2s, border-color .2s; }
+.links a:hover, .links a.act { color: var(--fg); border-color: var(--accent); }
+.nbtn { border: 1px solid var(--accent); background: transparent; color: var(--fg); border-radius: 999px; padding: 7px 14px; font: 500 13px var(--f-body); cursor: pointer; transition: background .2s; }
+.nbtn:hover { background: var(--glow); }
+@media (max-width: 760px) { .links { display: none; } }
+
+/* hero */
+.hero { position: relative; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 32px; align-items: center; padding-block: 56px 56px; }
+.hero > * { min-width: 0; }
+.bgfx { position: absolute; top: -40px; bottom: 0; left: 50%; width: 100vw; margin-left: -50vw; z-index: -1; overflow: hidden; pointer-events: none;
+  background: radial-gradient(60% 70% at 78% 40%, var(--glow), transparent 70%); }
+.bgfx::before { content: ""; position: absolute; inset: 0;
+  background: linear-gradient(var(--line) 1px, transparent 1px) 0 0 / 100% 48px, linear-gradient(90deg, var(--line) 1px, transparent 1px) 0 0 / 48px 100%;
+  opacity: .45; mask-image: linear-gradient(#000 50%, transparent); -webkit-mask-image: linear-gradient(#000 50%, transparent); animation: drift 24s linear infinite; }
+.bgfx canvas { position: absolute; inset: 0; width: 100%; height: 100%; opacity: .5; mask-image: linear-gradient(#000 40%, transparent); -webkit-mask-image: linear-gradient(#000 40%, transparent); }
+@keyframes drift { to { background-position: 0 48px, 48px 0; } }
+.hero h1 { font-size: clamp(40px, 7vw, 76px); font-weight: 800; margin: 14px 0 12px; }
+.hl { background: linear-gradient(90deg, var(--accent), var(--accent2), var(--accent)); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text; color: transparent; animation: shine 6s linear infinite; }
+@keyframes shine { to { background-position: 200% 0; } }
+.role { font-family: var(--f-mono); font-size: 14px; color: var(--muted); display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.role .bar { width: 1px; height: 14px; background: var(--line); }
+.lede { max-width: 56ch; color: var(--muted); font-size: 17px; margin: 18px 0 26px; }
+.cta { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 8px; font: 600 15px var(--f-body); text-decoration: none; cursor: pointer; transition: transform .2s, box-shadow .2s, border-color .2s; border: 1px solid transparent; }
+.btn svg { width: 16px; height: 16px; flex: none; }
+.btn.pri { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #04112e; box-shadow: 0 8px 28px var(--glow); }
+.btn.sec { border-color: var(--line); background: transparent; color: var(--fg); }
+.btn:hover { transform: translateY(-2px); }
+.btn.sec:hover { border-color: var(--accent); }
+.chips-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 26px; }
+.fact { font-family: var(--f-mono); font-size: 12px; border: 1px solid var(--line); border-radius: 6px; padding: 5px 10px; color: var(--muted); }
+.live { display: inline-flex; align-items: center; gap: 8px; }
+.live i { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); animation: blink 1.6s ease-in-out infinite; }
+@keyframes blink { 50% { opacity: .25; box-shadow: 0 0 0 5px transparent; } 0% { box-shadow: 0 0 0 0 var(--ok); } }
+
+/* orbit */
+.stage { --size: min(380px, 84vw); position: relative; overflow: hidden; border-radius: 50%; width: var(--size); height: var(--size); margin-inline: auto; }
+.core { position: absolute; inset: 31%; display: grid; place-items: center; }
+.core svg { width: 100%; height: 100%; filter: drop-shadow(0 0 22px var(--glow)); animation: pulse 3.6s ease-in-out infinite; }
+.ring { position: absolute; inset: 7%; animation: spin 36s linear infinite; }
+.ring.r2 { inset: 17%; animation-duration: 52s; animation-direction: reverse; }
+.ring::before { content: ""; position: absolute; inset: 0; border: 1px dashed var(--line); border-radius: 50%; }
+.node { position: absolute; left: 50%; top: 50%; width: 0; height: 0; transform: rotate(var(--a)) translateX(calc(var(--size) * var(--k))) rotate(calc(var(--a) * -1)); }
+.node span { position: absolute; left: 0; top: 0; translate: -50% -50%; display: grid; place-items: center; min-width: 54px; height: 34px; padding: 0 10px;
+  font: 500 12px var(--f-mono); border-radius: 999px; white-space: nowrap; background: var(--surface); border: 1px solid var(--accent); color: var(--fg);
+  box-shadow: 0 0 18px var(--glow); animation: spin 36s linear infinite reverse; }
+.r1 .node { --k: 0.43; }
+.r2 .node { --k: 0.33; }
+.r2 .node span { animation-duration: 52s; animation-direction: normal; border-color: var(--accent2); }
+.pulse-ring { position: absolute; inset: 31%; border-radius: 50%; border: 1px solid var(--accent2); animation: ping 3.6s ease-out infinite; }
+.pulse-ring.p2 { animation-delay: 1.8s; }
+@keyframes ping { from { transform: scale(1); opacity: .6; } to { transform: scale(2.1); opacity: 0; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes pulse { 50% { transform: scale(1.05); } }
+
+/* console band */
+.console { display: grid; grid-template-columns: 1.3fr 1fr; gap: 20px; margin-bottom: 8px; }
+.console > * { min-width: 0; }
+@media (max-width: 860px) { .console { grid-template-columns: 1fr; } }
+.win { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; box-shadow: 0 18px 50px rgba(0,0,0,.28); }
+.win .bar { display: flex; align-items: center; gap: 8px; padding: 9px 14px; background: var(--bg2); border-bottom: 1px solid var(--line); font: 12px var(--f-mono); color: var(--muted); }
+.win .bar b { margin-left: auto; font-weight: 400; color: var(--accent2); }
+.win .dots { display: flex; gap: 6px; } .win .dots i { width: 9px; height: 9px; border-radius: 50%; background: var(--line); display: block; }
+.cmd { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-bottom: 1px solid var(--line); font: 500 15px var(--f-mono); }
+.cmd label { color: var(--muted); font-size: 12px; }
+.cmd .field { flex: 1; min-width: 0; padding: 6px 10px; background: var(--bg); border: 1px solid var(--accent); border-radius: 4px; box-shadow: 0 0 0 3px var(--glow); color: var(--fg); min-height: 32px; }
+.caret { display: inline-block; width: 8px; height: 1em; background: var(--accent2); vertical-align: -2px; margin-left: 2px; animation: caret 1s steps(1) infinite; }
+@keyframes caret { 50% { opacity: 0; } }
+.res { padding: 16px 14px 6px; min-height: 108px; }
+.res h3 { font: 500 17px var(--f-body); letter-spacing: 0; }
+.res p { margin: 4px 0 0; color: var(--muted); font-size: 14px; }
+.tcodes { display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 14px 16px; }
+.tc { font: 12px var(--f-mono); padding: 3px 9px; border: 1px solid var(--line); border-radius: 5px; color: var(--muted); transition: all .25s; }
+.tc.on { color: #04112e; background: var(--accent2); border-color: var(--accent2); }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; align-content: stretch; }
+.stat { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 16px 14px; display: flex; flex-direction: column; justify-content: center; gap: 4px; min-width: 0; }
+.stat strong { font: 800 clamp(30px, 5vw, 44px)/1 var(--f-display); color: var(--accent2); font-variant-numeric: tabular-nums; }
+.stat span { font-size: 13px; color: var(--muted); }
+
+/* sections */
+section { padding-block: 72px; border-top: 1px solid var(--line); margin-top: 56px; }
+.console + section { margin-top: 56px; }
+.sec-head { display: grid; grid-template-columns: 220px 1fr; gap: 24px 40px; margin-bottom: 36px; }
+.sec-head h2 { font-size: clamp(28px, 4vw, 42px); font-weight: 700; }
+@media (max-width: 760px) { .sec-head { grid-template-columns: 1fr; } }
+.about { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+.about > * { min-width: 0; }
+@media (max-width: 860px) { .about { grid-template-columns: 1fr; } }
+.about p { margin: 0 0 14px; color: var(--muted); max-width: 62ch; }
+.about p strong { color: var(--fg); font-weight: 600; }
+
+.ledger { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.ledger header { display: flex; justify-content: space-between; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--line); font: 12px var(--f-mono); color: var(--muted); }
+.ledger header b { color: var(--accent2); font-weight: 500; }
+.tbl { overflow-x: auto; }
+.ledger table { width: 100%; border-collapse: collapse; font: 13px var(--f-mono); min-width: 420px; }
+.ledger th { text-align: left; color: var(--muted); font-weight: 400; padding: 10px 16px; }
+.ledger td { padding: 10px 16px; border-top: 1px solid var(--line); font-variant-numeric: tabular-nums; }
+.ledger th:nth-child(n+3), .ledger td:nth-child(n+3) { text-align: right; }
+.ledger tr.line { opacity: .35; transform: translateX(-8px); transition: opacity .5s, transform .5s; }
+.ledger.on tr.line { opacity: 1; transform: none; }
+.ledger.on tr.line:nth-child(2) { transition-delay: .3s; }
+.ledger.on tr.line:nth-child(3) { transition-delay: .7s; }
+.ledger footer { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-top: 1px solid var(--line); font: 12px var(--f-mono); color: var(--muted); gap: 10px; flex-wrap: wrap; }
+.bal { color: var(--ok); display: inline-flex; align-items: center; gap: 6px; opacity: .3; transition: opacity .4s 1.2s; }
+.ledger.on .bal { opacity: 1; }
+.bal i { width: 8px; height: 8px; border-radius: 50%; background: var(--ok); display: inline-block; }
+
+/* tiles */
+.procs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 860px) { .procs { grid-template-columns: 1fr; } }
+.proc { position: relative; overflow: hidden; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 22px; min-width: 0; transition: transform .15s ease-out, border-color .25s, box-shadow .25s; transform-style: preserve-3d; }
+.proc::after { content: ""; position: absolute; inset: 0; background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 0%), var(--glow), transparent 60%); opacity: 0; transition: opacity .3s; pointer-events: none; }
+.proc:hover { border-color: var(--accent); box-shadow: 0 14px 34px var(--glow); }
+.proc:hover::after { opacity: 1; }
+.proc h3 { font-size: 22px; margin: 6px 0 10px; }
+.proc p { margin: 0 0 14px; color: var(--muted); font-size: 15px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { font: 12px var(--f-mono); padding: 3px 9px; border-radius: 5px; background: var(--bg2); border: 1px solid var(--line); }
+
+/* flow */
+.panel { margin-top: 28px; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 22px; }
+.panel h3 { font-size: 18px; margin-bottom: 4px; }
+.panel > p { margin: 0 0 20px; color: var(--muted); font-size: 14px; }
+.flow { display: flex; align-items: stretch; }
+.fn { flex: 1; min-width: 0; border: 1px solid var(--line); border-radius: 8px; padding: 12px; font-size: 13px; background: var(--bg2); animation: lit 10s infinite; animation-delay: calc(var(--i) * 2.5s); }
+.fn b { display: block; font: 500 11px var(--f-mono); color: var(--accent2); margin-bottom: 4px; }
+.lk { flex: 0 0 38px; position: relative; align-self: center; height: 2px; background: var(--line); }
+.lk i { position: absolute; top: -3px; left: 0; width: 8px; height: 8px; border-radius: 50%; background: var(--accent2); box-shadow: 0 0 10px var(--accent2); animation: travel 10s infinite; animation-delay: calc(var(--i) * 2.5s + 1.7s); opacity: 0; }
+@keyframes travel { 0% { left: 0; opacity: 0; } 3% { opacity: 1; } 12% { left: calc(100% - 8px); opacity: 1; } 15%, 100% { left: calc(100% - 8px); opacity: 0; } }
+@keyframes lit { 0%, 18% { border-color: var(--accent2); box-shadow: 0 0 22px var(--glow); } 24%, 100% { border-color: var(--line); box-shadow: none; } }
+@media (max-width: 700px) {
+  .flow { flex-direction: column; }
+  .lk { flex: 0 0 30px; width: 2px; height: 30px; }
+  .lk i { left: -3px; top: 0; animation-name: travelv; }
+}
+@keyframes travelv { 0% { top: 0; opacity: 0; } 3% { opacity: 1; } 12% { top: calc(100% - 8px); opacity: 1; } 15%, 100% { top: calc(100% - 8px); opacity: 0; } }
+
+.dun { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+@media (max-width: 640px) { .dun { grid-template-columns: 1fr; } }
+.lv { border: 1px solid var(--line); border-radius: 8px; padding: 12px; background: var(--bg2); font-size: 13px; min-width: 0; }
+.lv b { display: block; font: 500 11px var(--f-mono); margin-bottom: 8px; }
+.lv:nth-child(1) b { color: var(--ok); } .lv:nth-child(2) b { color: var(--warn); } .lv:nth-child(3) b { color: #ff7a7a; }
+.meter { height: 6px; border-radius: 4px; background: var(--line); overflow: hidden; margin-top: 10px; }
+.meter i { display: block; height: 100%; width: 0; border-radius: 4px; background: var(--ok); }
+.lv:nth-child(2) .meter i { background: var(--warn); } .lv:nth-child(3) .meter i { background: #ff7a7a; }
+.panel.seen .meter i { animation: fill 1.4s cubic-bezier(.2,.7,.2,1) forwards; animation-delay: calc(var(--i) * .5s); }
+@keyframes fill { to { width: var(--w); } }
+
+/* skills */
+.skills { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+@media (max-width: 760px) { .skills { grid-template-columns: 1fr; } }
+.skills h3 { font: 500 14px var(--f-mono); color: var(--muted); margin-bottom: 14px; letter-spacing: .08em; }
+.chip { display: inline-block; margin: 0 8px 8px 0; padding: 8px 14px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); font-size: 14px; transition: transform .2s, border-color .2s; }
+.chip:hover { transform: translateY(-2px); border-color: var(--accent); }
+.chip.k { border-color: var(--accent); animation: chipglow 4.5s ease-in-out infinite; animation-delay: calc(var(--i) * .5s); }
+@keyframes chipglow { 50% { box-shadow: 0 0 16px var(--glow); } }
+
+/* timeline */
+.tl { position: relative; padding-left: 28px; border-left: 2px solid var(--line); }
+.tl::after { content: ""; position: absolute; left: -2px; top: 0; width: 2px; height: 0; background: linear-gradient(var(--accent), var(--accent2)); animation: grow 2.4s .3s ease-out forwards; }
+@keyframes grow { to { height: 100%; } }
+.tl::before { content: ""; position: absolute; left: -8px; top: 6px; width: 14px; height: 14px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 6px var(--glow); z-index: 1; animation: halo 2.6s ease-in-out infinite; }
+@keyframes halo { 50% { box-shadow: 0 0 0 12px transparent; } }
+.job-top { display: flex; justify-content: space-between; gap: 10px 20px; flex-wrap: wrap; align-items: baseline; margin-bottom: 4px; }
+.job h3 { font-size: 24px; }
+.when { font: 13px var(--f-mono); color: var(--accent2); }
+.co { color: var(--muted); margin: 0 0 18px; }
+.job ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; max-width: 74ch; }
+.job li { position: relative; padding-left: 22px; opacity: .45; transform: translateX(-10px); transition: opacity .5s, transform .5s; transition-delay: calc(var(--n) * 110ms); }
+.job.seen li { opacity: 1; transform: none; }
+.job li::before { content: ""; position: absolute; left: 0; top: .6em; width: 8px; height: 8px; border: 1.5px solid var(--accent2); border-radius: 2px; transform: rotate(45deg); }
+
+/* training + projects */
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+@media (max-width: 860px) { .two { grid-template-columns: 1fr; } }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 24px; min-width: 0; }
+.card h3 { font-size: 20px; margin-bottom: 14px; }
+.card ul { margin: 0; padding-left: 18px; color: var(--muted); display: grid; gap: 6px; }
+.card ul li::marker { color: var(--accent); }
+.proj { display: grid; gap: 14px; }
+.proj .item { padding: 16px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg2); transition: border-color .2s, transform .2s; }
+.proj .item:hover { border-color: var(--accent); transform: translateX(4px); }
+.proj .item b { display: block; font-family: var(--f-display); font-size: 17px; margin-bottom: 2px; }
+.proj .item span { color: var(--muted); font-size: 14px; }
+
+/* resume + contact */
+.resume-band { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; background: linear-gradient(135deg, var(--surface), var(--bg2)); border: 1px solid var(--accent); border-radius: 14px; padding: 28px; box-shadow: 0 0 40px var(--glow); }
+@media (max-width: 760px) { .resume-band { grid-template-columns: 1fr; } }
+.resume-band h2 { font-size: clamp(26px, 4vw, 38px); }
+.resume-band p { margin: 10px 0 0; color: var(--muted); max-width: 50ch; }
+.contact { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: end; }
+@media (max-width: 760px) { .contact { grid-template-columns: 1fr; } }
+.contact h2 { font-size: clamp(34px, 6vw, 64px); font-weight: 800; }
+.mail { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font: 15px var(--f-mono); }
+.mail a { color: var(--accent2); text-decoration: none; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; }
+.mail a:hover { border-color: var(--accent2); }
+.copy { font: 12px var(--f-mono); background: none; color: var(--accent2); border: 1px solid var(--line); border-radius: 5px; padding: 4px 10px; cursor: pointer; }
+.copy:hover { border-color: var(--accent); }
+footer.end { padding-block: 28px; border-top: 1px solid var(--line); color: var(--muted); font: 12px var(--f-mono); display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+
+/* resume modal */
+.modal { position: fixed; inset: 0; z-index: 50; display: grid; place-items: center; padding: max(16px, env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) max(16px, env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)); background: rgba(3, 8, 22, .82); backdrop-filter: blur(6px); animation: fadein .25s both; }
+.sheet { width: min(760px, 100%); max-height: 100%; display: flex; flex-direction: column; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; animation: pop .35s cubic-bezier(.2,.8,.2,1) both; }
+.sheet-bar { display: flex; align-items: center; gap: 10px; padding: 12px 16px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+.sheet-bar strong { font: 500 13px var(--f-mono); margin-right: auto; }
+.sheet-bar .btn { padding: 8px 14px; font-size: 13px; }
+.sheet-body { overflow: auto; padding: 16px; background: var(--bg2); }
+.paper { background: var(--paper); color: var(--ink); border-radius: 4px; padding: clamp(18px, 4vw, 40px); font-size: 14px; line-height: 1.55; box-shadow: 0 10px 40px rgba(0,0,0,.35); }
+.paper h2 { font: 800 28px/1.1 var(--f-display); color: var(--ink); letter-spacing: -.01em; }
+.paper .st { font-weight: 600; color: #0b5fd8; margin: 4px 0 2px; }
+.paper .meta { color: var(--ink2); font-size: 13px; overflow-wrap: anywhere; }
+.paper hr { border: 0; border-top: 2px solid #0b5fd8; margin: 12px 0 4px; }
+.paper h4 { margin: 16px 0 6px; font: 700 13px var(--f-body); letter-spacing: .06em; color: var(--ink); }
+.paper p { margin: 0 0 6px; color: #1b2a4a; }
+.paper ul { margin: 4px 0 0; padding-left: 20px; color: #1b2a4a; }
+.paper li { margin-bottom: 3px; }
+.toast { position: fixed; left: 50%; bottom: max(24px, env(safe-area-inset-bottom, 0px)); transform: translateX(-50%); z-index: 60; background: var(--accent); color: #04112e; font: 600 14px var(--f-body); padding: 10px 18px; border-radius: 999px; box-shadow: 0 10px 30px var(--glow); animation: pop .3s both; max-width: calc(100% - 32px); text-align: center; }
+@keyframes fadein { from { opacity: 0; } }
+@keyframes pop { from { opacity: 0; transform: translateY(14px) scale(.97); } }
+
+/* entrance + reveal (readable at rest) */
+.in { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--d, 0) * 120ms); }
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+.rv { opacity: .4; transform: translateY(18px); transition: opacity .7s, transform .7s; }
+.rv.seen { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  .rv, .ledger tr.line, .bal, .job li { opacity: 1 !important; transform: none !important; }
+  .tl::after { height: 100%; }
+  .meter i { width: var(--w); }
+  .bgfx canvas { display: none; }
+}
+</style>
+
+<div class="wrap">
+  <nav>
+    <a class="brand" href="#top" aria-label="Gampa Aravind home">
+      <svg viewBox="0 0 64 64" aria-hidden="true"><defs><linearGradient id="gm" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2f8bff"/><stop offset="1" stop-color="#62c0ff"/></linearGradient></defs><path d="M32 3 57 17.5v29L32 61 7 46.5v-29z" fill="url(#gm)"/><path d="M20 24h24M20 32h16M20 40h20" stroke="#04112e" stroke-width="4" stroke-linecap="round"/></svg>
+      <span>G. Aravind</span>
+    </a>
+    <div class="links" id="navlinks">
+      <a href="#about">About</a><a href="#process">Processes</a><a href="#skills">Skills</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#resume">Resume</a><a href="#contact">Contact</a>
+    </div>
+    <button class="nbtn" type="button" data-open-resume>View resume</button>
+    <div class="prog" id="prog"></div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="bgfx" aria-hidden="true"><canvas id="rain"></canvas></div>
+    <div>
+      <div class="eyebrow in" style="--d:0"> Hyderabad, India</div>
+      <h1 class="in" style="--d:1">Gampa <span class="hl">Aravind</span></h1>
+      <div class="role in" style="--d:2"><span>SAP Finance (FICO)</span><i class="bar"></i><span>Finance &amp; Reporting Analyst</span></div>
+      <p class="lede in" style="--d:3">Two years of SAP Finance work in a live client environment: postings, payment runs, dunning and expense support, backed by solid training across GL, AP, AR and S/4HANA Finance.</p>
+      <div class="cta in" style="--d:4">
+        <button class="btn pri" type="button" data-open-resume>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+          View resume
+        </button>
+        <button class="btn sec" type="button" data-download hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>
+          Download resume
+        </button>
+        <a class="btn sec" href="#contact">Get in touch</a>
+      </div>
+      <div class="chips-row in" style="--d:5">
+        <span class="fact live"><i></i>Accenture · Sep 2024 – Present</span>
+        <span class="fact">SAP S/4HANA Finance</span>
+        <span class="fact">F110 · Dunning · FI postings</span>
+      </div>
+    </div>
+
+    <div class="stage in" style="--d:3" role="img" aria-label="Animated diagram of finance modules GL, AP, AR, F110, dunning and reports orbiting a central FICO core">
+      <div class="pulse-ring"></div><div class="pulse-ring p2"></div>
+      <div class="ring r1">
+        <div class="node" style="--a:0deg"><span>GL</span></div>
+        <div class="node" style="--a:120deg"><span>AP</span></div>
+        <div class="node" style="--a:240deg"><span>AR</span></div>
+      </div>
+      <div class="ring r2">
+        <div class="node" style="--a:60deg"><span>F110</span></div>
+        <div class="node" style="--a:180deg"><span>Dunning</span></div>
+        <div class="node" style="--a:300deg"><span>Reports</span></div>
+      </div>
+      <div class="core">
+        <svg viewBox="0 0 120 120" aria-hidden="true">
+          <defs><linearGradient id="gc" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2f8bff"/><stop offset="1" stop-color="#62c0ff"/></linearGradient></defs>
+          <path d="M60 4 110 32v56L60 116 10 88V32z" fill="url(#gc)"/>
+          <path d="M60 4 110 32v56L60 116 10 88V32z" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="2"/>
+          <text x="60" y="73" text-anchor="middle" font-family="Bricolage Grotesque, Segoe UI, sans-serif" font-weight="800" font-size="40" fill="#04112e">FICO</text>
+        </svg>
+      </div>
+    </div>
+  </header>
+
+  <div class="console">
+    <div class="win rv" aria-label="Animated SAP command field cycling through finance transaction codes">
+      <div class="bar"><div class="dots"><i></i><i></i><i></i></div><span>SAP Easy Access</span><b>FI · Financial Accounting</b></div>
+      <div class="cmd"><label>Command</label><div class="field" id="tcfield" aria-live="off"><span id="tctext"></span><span class="caret"></span></div></div>
+      <div class="res"><h3 id="tcname">Enter Incoming Invoice</h3><p id="tcdesc">Post a vendor invoice to Accounts Payable.</p></div>
+      <div class="tcodes" id="tclist"></div>
+    </div>
+    <div class="stats rv">
+      <div class="stat"><strong data-count="2" data-suffix="+">0</strong><span>Years in SAP FICO</span></div>
+      <div class="stat"><strong data-count="3">0</strong><span>Core ledgers: GL, AP, AR</span></div>
+      <div class="stat"><strong data-count="7">0</strong><span>Support duties on the live project</span></div>
+    </div>
+  </div>
+
+  <section id="about">
+    <div class="sec-head rv"><div class="eyebrow">About</div><h2>End-to-end finance processes, handled inside SAP.</h2></div>
+    <div class="about">
+      <div class="rv">
+        <p>I am an <strong>SAP Finance (FICO) professional</strong> with hands-on experience in SAP training, internal support and live project work. My focus is the full finance cycle: <strong>General Ledger, Accounts Payable, Accounts Receivable</strong> and S/4HANA Finance.</p>
+        <p>Day to day I post vendor, customer and GL entries, run the <strong>Automatic Payment Program (F110)</strong>, assist with the <strong>dunning process</strong> and support employee expense reimbursements, while helping senior consultants close production tickets.</p>
+      </div>
+      <div class="ledger rv" id="ledger" aria-label="Illustrative vendor invoice posting">
+        <header><span>Illustrative vendor invoice posting</span><b>Document type KR</b></header>
+        <div class="tbl">
+          <table>
+            <thead><tr><th>Item</th><th>Account</th><th>Debit</th><th>Credit</th></tr></thead>
+            <tbody>
+              <tr class="line"><td>001</td><td>Expense (GL)</td><td>10,000.00</td><td></td></tr>
+              <tr class="line"><td>002</td><td>Input tax (GL)</td><td>1,800.00</td><td></td></tr>
+              <tr class="line"><td>003</td><td>Vendor (AP)</td><td></td><td>11,800.00</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <footer><span>Sample figures, not client data</span><span class="bal"><i></i>Balanced · 11,800.00 = 11,800.00</span></footer>
+      </div>
+    </div>
+  </section>
+
+  <section id="process">
+    <div class="sec-head rv"><div class="eyebrow">Processes</div><h2>Where the work happens.</h2></div>
+    <div class="procs">
+      <article class="proc rv"><div class="eyebrow">Procure to pay</div><h3>Accounts Payable</h3><p>Invoice processing, vendor postings, open items and scheduled vendor payment runs.</p><div class="tags"><span class="tag">AP</span><span class="tag">F110</span><span class="tag">Vendor postings</span></div></article>
+      <article class="proc rv"><div class="eyebrow">Order to cash</div><h3>Accounts Receivable</h3><p>Customer postings and overdue payment reminders through the dunning process.</p><div class="tags"><span class="tag">AR</span><span class="tag">Dunning</span><span class="tag">Customer postings</span></div></article>
+      <article class="proc rv"><div class="eyebrow">Record to report</div><h3>General Ledger</h3><p>GL accounting entries, reconciliation concepts and SAP FI reporting.</p><div class="tags"><span class="tag">GL</span><span class="tag">Reconciliation</span><span class="tag">FI reporting</span></div></article>
+    </div>
+
+    <div class="panel rv">
+      <h3>From invoice to cleared item</h3>
+      <p>How a vendor invoice moves through SAP until the payment run clears it.</p>
+      <div class="flow">
+        <div class="fn" style="--i:0"><b>FB60</b>Invoice posted to the vendor account</div>
+        <div class="lk" style="--i:0"><i></i></div>
+        <div class="fn" style="--i:1"><b>OPEN ITEM</b>Item waits in AP until due</div>
+        <div class="lk" style="--i:1"><i></i></div>
+        <div class="fn" style="--i:2"><b>F110</b>Payment proposal reviewed and run</div>
+        <div class="lk" style="--i:2"><i></i></div>
+        <div class="fn" style="--i:3"><b>CLEARED</b>Open item cleared, bank updated</div>
+      </div>
+    </div>
+
+    <div class="panel rv">
+      <h3>Dunning on the receivables side</h3>
+      <p>Overdue customer items move up the reminder levels. A typical three-level setup, shown for illustration.</p>
+      <div class="dun">
+        <div class="lv" style="--i:0"><b>LEVEL 1</b>Friendly payment reminder<div class="meter"><i style="--w:34%"></i></div></div>
+        <div class="lv" style="--i:1"><b>LEVEL 2</b>Firm reminder with a deadline<div class="meter"><i style="--w:67%"></i></div></div>
+        <div class="lv" style="--i:2"><b>LEVEL 3</b>Final notice before escalation<div class="meter"><i style="--w:100%"></i></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="sec-head rv"><div class="eyebrow">Skills</div><h2>SAP first, with a technical base.</h2></div>
+    <div class="skills rv">
+      <div>
+        <h3>SAP FINANCE</h3>
+        <span class="chip k" style="--i:0">SAP S/4HANA Finance</span><span class="chip k" style="--i:1">General Ledger (GL)</span><span class="chip k" style="--i:2">Accounts Payable (AP)</span><span class="chip k" style="--i:3">Accounts Receivable (AR)</span><span class="chip k" style="--i:4">F110 Automatic Payment Program</span><span class="chip k" style="--i:5">Dunning Process</span>
+      </div>
+      <div>
+        <h3>TECHNICAL</h3>
+        <span class="chip">SQL</span><span class="chip">Git &amp; GitHub</span><span class="chip">C++</span><span class="chip">HTML</span><span class="chip">CSS</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="sec-head rv"><div class="eyebrow">Experience</div><h2>Live client support at Accenture.</h2></div>
+    <div class="tl job rv" id="job">
+      <div class="job-top"><h3>Packaged App Development Associate</h3><span class="when">Sep 2024 – Present</span></div>
+      <p class="co">Accenture · SAP Finance (FICO) support project</p>
+      <ul>
+        <li style="--n:0">Works on an SAP Finance (FICO) support project in a live client environment.</li>
+        <li style="--n:1">Performs SAP FI postings, including vendor, customer and general ledger accounting entries.</li>
+        <li style="--n:2">Supports Accounts Payable operations and invoice processing.</li>
+        <li style="--n:3">Works on the Automatic Payment Program (F110) for vendor payment runs and processing open items.</li>
+        <li style="--n:4">Assists in the dunning process for customer overdue payment reminders.</li>
+        <li style="--n:5">Supports the expense management process in the Oyster tool, used for employee travel and business expense submissions and reimbursements.</li>
+        <li style="--n:6">Assists senior consultants with production support activities and ticket resolution.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="sec-head rv"><div class="eyebrow">Training &amp; projects</div><h2>Foundations and builds.</h2></div>
+    <div class="two">
+      <div class="card rv">
+        <h3>SAP Finance training</h3>
+        <ul>
+          <li>Company Code configuration and Financial Accounting structure</li>
+          <li>Chart of Accounts and Fiscal Year setup</li>
+          <li>General Ledger accounting and postings</li>
+          <li>Accounts Payable</li>
+          <li>Accounts Receivable</li>
+          <li>SAP FI reporting and reconciliation concepts</li>
+          <li>Overview of SAP S/4HANA Finance architecture</li>
+        </ul>
+      </div>
+      <div class="card rv">
+        <h3>Academic projects</h3>
+        <div class="proj">
+          <div class="item"><b>Free Food Spotter</b><span>Web application connecting restaurants and NGOs.</span></div>
+          <div class="item"><b>Friction stir welding prediction</b><span>ML-based prediction of mechanical properties in friction stir welding.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="resume">
+    <div class="resume-band rv">
+      <div>
+        <div class="eyebrow">Resume</div>
+        <h2 style="margin-top:10px">Read it here or take a copy.</h2>
+        <p>One page covering experience, SAP training, skills and projects.</p>
+      </div>
+      <div class="cta">
+        <button class="btn pri" type="button" data-open-resume>View resume</button>
+        <button class="btn sec" type="button" data-download hidden>Download PDF</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="contact rv">
+      <div>
+        <div class="eyebrow">Contact</div>
+        <h2 style="margin-top:12px">Let's connect.</h2>
+        <p style="color:var(--muted);max-width:46ch;margin:14px 0 0">Based in Hyderabad, India. Write to me about SAP Finance (FICO) work, support projects or reporting.</p>
+      </div>
+      <div class="mail"><a href="mailto:Aravindgampa7075@gmail.com" id="mailtxt">Aravindgampa7075@gmail.com</a><button class="copy" type="button" id="copymail">Copy</button></div>
+    </div>
+  </section>
+
+  <footer class="end"><span>Gampa Aravind · SAP Finance (FICO)</span><span>Hyderabad, India</span></footer>
+</div>
+
+<div class="modal" id="modal" hidden role="dialog" aria-modal="true" aria-label="Resume of Gampa Aravind">
+  <div class="sheet">
+    <div class="sheet-bar">
+      <strong>Gampa_Aravind_Resume.pdf</strong>
+      <button class="btn pri" type="button" data-download hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>
+        Download
+      </button>
+      <button class="btn sec" type="button" id="closeresume">Close</button>
+    </div>
+    <div class="sheet-body">
+      <article class="paper">
+        <h2>GAMPA ARAVIND</h2>
+        <div class="st">SAP Finance (FICO) | Finance &amp; Reporting Analyst</div>
+        <div class="meta">Hyderabad, India · Aravindgampa7075@gmail.com</div>
+        <hr>
+        <h4>PROFESSIONAL SUMMARY</h4>
+        <p>SAP Finance (FICO) professional with 1.5+ years of experience in SAP Finance training, internal support and live project exposure. Strong understanding of end-to-end finance processes including General Ledger (GL), Accounts Payable (AP), Accounts Receivable (AR) and SAP S/4HANA Finance. Hands-on experience in SAP FI postings, Automatic Payment Program (F110), Dunning process, and expense management support.</p>
+        <h4>CORE SKILLS</h4>
+        <p>SAP S/4HANA Finance, General Ledger (GL), Accounts Payable (AP), Accounts Receivable (AR), F110 (Automatic Payment Program), Dunning Process, SQL, Git &amp; GitHub, C++, HTML, CSS</p>
+        <h4>PROFESSIONAL EXPERIENCE</h4>
+        <p><strong>Packaged App Development Associate – Accenture</strong><br>Sep 2024 – Present</p>
+        <ul>
+          <li>Working in SAP Finance (FICO) support project in a live client environment</li>
+          <li>Performed SAP FI postings including vendor, customer and general ledger accounting entries</li>
+          <li>Supported Accounts Payable (AP) operations and invoice processing activities</li>
+          <li>Worked on Automatic Payment Program (F110) for vendor payment runs and processing open items</li>
+          <li>Assisted in Dunning process for customer overdue payment reminders</li>
+          <li>Supported expense management process using Oyster tool, used for employee travel and business expense submissions and reimbursements</li>
+          <li>Assisted senior consultants in production support activities and ticket resolution</li>
+        </ul>
+        <h4>SAP FINANCE TRAINING</h4>
+        <ul>
+          <li>SAP Company Code configuration and Financial Accounting structure</li>
+          <li>Chart of Accounts and Fiscal Year setup</li>
+          <li>General Ledger (GL) accounting and postings</li>
+          <li>Accounts Payable</li>
+          <li>Accounts Receivable</li>
+          <li>SAP FI reporting and reconciliation concepts</li>
+          <li>Overview of SAP S/4HANA Finance architecture</li>
+        </ul>
+        <h4>ACADEMIC PROJECTS</h4>
+        <ul>
+          <li>Free Food Spotter – Web application connecting restaurants and NGOs</li>
+          <li>ML-based prediction of mechanical properties in Friction stir welding</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</div>
+
+<script>
+var PDF_B64 = "JVBERi0xLjQKJZOMi54gUmVwb3J0TGFiIEdlbmVyYXRlZCBQREYgZG9jdW1lbnQgKG9wZW5zb3VyY2UpCjEgMCBvYmoKPDwKL0YxIDIgMCBSIC9GMiAzIDAgUgo+PgplbmRvYmoKMiAwIG9iago8PAovQmFzZUZvbnQgL0hlbHZldGljYSAvRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZyAvTmFtZSAvRjEgL1N1YnR5cGUgL1R5cGUxIC9UeXBlIC9Gb250Cj4+CmVuZG9iagozIDAgb2JqCjw8Ci9CYXNlRm9udCAvSGVsdmV0aWNhLUJvbGQgL0VuY29kaW5nIC9XaW5BbnNpRW5jb2RpbmcgL05hbWUgL0YyIC9TdWJ0eXBlIC9UeXBlMSAvVHlwZSAvRm9udAo+PgplbmRvYmoKNCAwIG9iago8PAovQ29udGVudHMgOCAwIFIgL01lZGlhQm94IFsgMCAwIDU5NS4yNzU2IDg0MS44ODk4IF0gL1BhcmVudCA3IDAgUiAvUmVzb3VyY2VzIDw8Ci9Gb250IDEgMCBSIC9Qcm9jU2V0IFsgL1BERiAvVGV4dCAvSW1hZ2VCIC9JbWFnZUMgL0ltYWdlSSBdCj4+IC9Sb3RhdGUgMCAvVHJhbnMgPDwKCj4+IAogIC9UeXBlIC9QYWdlCj4+CmVuZG9iago1IDAgb2JqCjw8Ci9QYWdlTW9kZSAvVXNlTm9uZSAvUGFnZXMgNyAwIFIgL1R5cGUgL0NhdGFsb2cKPj4KZW5kb2JqCjYgMCBvYmoKPDwKL0F1dGhvciAoR2FtcGEgQXJhdmluZCkgL0NyZWF0aW9uRGF0ZSAoRDoyMDI2MTAyODA5MDkxMiswMCcwMCcpIC9DcmVhdG9yIChcKHVuc3BlY2lmaWVkXCkpIC9LZXl3b3JkcyAoKSAvTW9kRGF0ZSAoRDoyMDI2MTAyODA5MDkxMiswMCcwMCcpIC9Qcm9kdWNlciAoUmVwb3J0TGFiIFBERiBMaWJyYXJ5IC0gXChvcGVuc291cmNlXCkpIAogIC9TdWJqZWN0IChcKHVuc3BlY2lmaWVkXCkpIC9UaXRsZSAoR2FtcGEgQXJhdmluZCAtIFJlc3VtZSkgL1RyYXBwZWQgL0ZhbHNlCj4+CmVuZG9iago3IDAgb2JqCjw8Ci9Db3VudCAxIC9LaWRzIFsgNCAwIFIgXSAvVHlwZSAvUGFnZXMKPj4KZW5kb2JqCjggMCBvYmoKPDwKL0ZpbHRlciBbIC9BU0NJSTg1RGVjb2RlIC9GbGF0ZURlY29kZSBdIC9MZW5ndGggMTkxMgo+PgpzdHJlYW0KR2F1YFQ/JCMhYCdSZi5HZ250WUgnIUVUIylvJ3A3K15uIkwkaFMzXTA4YjFxV2JZNzZhWDU4K0lzYWFFMyRxITJHTyRcMjBGPiYxXiNwSC9IUi9fT2ZLZFUqLWpCQmMiN04saiNfZ00qJkQocjIxUGEpTHBVKk5iLm03V20hPV0+MF9pWmhJNDlBQzZxcUFBbWYtLS5iKDlwSGgmWzgySTp1WyZbcDN0Y3NXRjkmYVYhcmgqSlgta3MxQkBCU243RVApXC1kX1IvTyFGVGpxJCpsRGRZZyY1K1JATT8tQjRATzdtZSFUZzlnKHE0PHBES0deTEc1Zl1jaTJaUlhTcVh1VENbPiJUQD5mKV41LTZlLFRyY0MnNF10OGcwbEA0M2UvJ09nM1xfJzRzPVJyOVoyRExAVWBtWTxvZkFRK2JVbUZYYStFai5VWiVvKGQiY0lXLkRnUG0+XnNIQDZFVyRUSEBlVkRwXmVEXDohTCxuRHMvTmQ1NkgrK1FgKjhPPmJkW1EwJikzPz1gLzgqWityYjpLXzRGc3U3W0ArZzZTJlMqNFRaXlBZTDEocWxBOVBCJ08zO3E3XGE+bzJDLE1VL0hSU3UlPWttLUV0MzVrNnBPQC1wUXFyOGwiJUshaChIUSlYRklzcCQhNG1WYyUvQUlNYGFOIUMrNS9mbjdZaEdrOTp0aUg8UEtbT3E0S0tRXCRPUWFSZF9DWFBsNmM2RGNUXCNKYFBbPCNqLj0+WDNAZz5WUmtAZkZFRmkqMGtlVShSWW0naS9oMzlNJjZsPjZOY29iN18uMklsOV8wSmxXZCNkS2dOX1ZGTyE5ampERnJkSSRyL04nSlZgOk9ZUzQtZS9DMmAmTEJsVm5kNU9NUUlKSEhONDViRFkoJj1EXSwzZE03QyFLOEwqXzFVcFBESSQ+VFdqSl8/ZnUqbkQhNnIhX2ZnRl89YDBMM2FAPm42blBvXCwxYClZZTZqWHBSNmAxLUgiSFhLX0JQPHFiQltYRjtcVjVDUS8halQpVlBNJjljUDVeQEU6T2syQ1F0dF4tWj1oUDs5dF89Uk5Ea2VwOk9aX25eMFRrISg7PUkoUGlfcVBXIm9eMjxzNm9HYlM5XTlEMTEpcEYuOiRrP2oocydHKm9RcjtGNWh0Oj9ZPi1oSlc2YjFkP2pvYC1RM0lHSSdZRGA4WU44TTtmXyJIaSU1KE4xNyU6OVYwWEFERCYxXGtsSj1qODpPbllBU2JqQkkjVzRkWlkrQmVpPHNJOjY/PStqO186SjMtRzg8ZyI+OC9ML1BdS0tEZGg7XSQzb1UlJUZcaC1mamE3ZC5TU0s5dVxJV0VUUDM8MmBbJGtjZXFZWE1bJDI/dEBrZ21LWF1nITA/RU1rNFBHKzMtTiZvXW1pUCJzIVkqYTw4VGNnZycnUlE5KGcuT3JJcyJYJTphPEVbQS5kRFhSYy03aU1Pc01HJElWJFtOaj1MREs+YiVCQVUsKWYlMm9kVTNfbk5gVj0hdEJKY2UyTUhIa1o3InJvdE1RMV5wbUc/MFBiME8xJD0oWFVRPl1KN0YtbGVDa2FLQypKYVwsZFlhciYwNTAqZG89QFFCY0FRY3NIU1BQZlxjMFUvZ2prPCM5RUEnT1BpK1shZzY8LVtQOmA+R0NhMGx0LV88LW8/SFtVNWVlNGR1bHJBVkw4Mk5iS0ZKLjZXSVsuLid1XFUiM0hmbCNINjYvaDlMVF1XclooVzhbbE5sLC9hUG9CWS4pM0ojV2s7cyNAW1AsS15ASF9STkttMnQ2NXJMYUxXIVZKXVs7MlhUMjhhISNwUVNLRkRUZVMwVmAmKC1KJzoqOWQqQEBXUm1gYmo0cCFJX3FwPUAzMmIwLHU/LHVLQFldZT5VJmlTJCFSI0E4OyFTI0RsbTtrcjg/TWMvYV9hZEZrUy9lJSZjJksrWk8pdFVCRFFGLGE5cUxWMjo9c2VyK2ZSZ1otZShKLDQyOGhxbihmK1BHJD41Ok1paTVFTU5kQ3Q7QnFmZSFlJiFEaUFYWUBEIkNpPUUuR2IwYSgwKTsoWCZHIVpTMGBzIUIzbFhNWCEyOjspYHVQNUxXSElOV1E8LFBSRUVlNV5bRCU4MmBiQ1NyL09JJWBrOUFyY3NbSTJUcGw3JChOYzAwaj5MWWdaPUU+bmJkVTA7IUJHZCVSXSlib2lKWHRGN0ddQVdzJCxyVkM4Wj5BaGRFZl5oNHMtXUdsdEgpcy4lQSJlW09NZihfQjdOblVzc2pDQXUjTWJyZTZzcnU/Jm1UUVwvbm0xLlssai5nVjsnL3NJOzw6bFVBZldvcCU4aWpURyVgZE9gYWoiVzFiTFEiI2FgdTpvIylxOV0zRmxrZFNdWiZTJjdJJiIlLXBVTEInXyomUUA/ZiI/cy9mYlcpZnE2Vzc4KD1TWzFZZjZgNC1uaDZta0spMylvYWkkTjFUQ3UqO2duIVEwSUEtdWdRTk5WZ1E7TipkcV8raGhuUFdBI3EiIlk2QjxWbzNHazZgN2IwdC9TYmFGYDorS0FHPil+PmVuZHN0cmVhbQplbmRvYmoKeHJlZgowIDkKMDAwMDAwMDAwMCA2NTUzNSBmIAowMDAwMDAwMDYxIDAwMDAwIG4gCjAwMDAwMDAxMDIgMDAwMDAgbiAKMDAwMDAwMDIwOSAwMDAwMCBuIAowMDAwMDAwMzIxIDAwMDAwIG4gCjAwMDAwMDA1MjQgMDAwMDAgbiAKMDAwMDAwMDU5MiAwMDAwMCBuIAowMDAwMDAwODgxIDAwMDAwIG4gCjAwMDAwMDA5NDAgMDAwMDAgbiAKdHJhaWxlcgo8PAovSUQgCls8OTIwZjUwZDNhMGFmN2FkMjcyZDliODA4ZmI5NmFhOGQ+PDkyMGY1MGQzYTBhZjdhZDI3MmQ5YjgwOGZiOTZhYThkPl0KJSBSZXBvcnRMYWIgZ2VuZXJhdGVkIFBERiBkb2N1bWVudCAtLSBkaWdlc3QgKG9wZW5zb3VyY2UpCgovSW5mbyA2IDAgUgovUm9vdCA1IDAgUgovU2l6ZSA5Cj4+CnN0YXJ0eHJlZgoyOTQzCiUlRU9GCg==";
+var EMAIL = "Aravindgampa7075@gmail.com";
+(function () {
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ---------- toast ---------- */
+  var toastEl = null, toastT = 0;
+  function toast(msg) {
+    if (toastEl) toastEl.remove();
+    toastEl = document.createElement("div"); toastEl.className = "toast"; toastEl.textContent = msg; toastEl.setAttribute("role", "status");
+    document.body.appendChild(toastEl); clearTimeout(toastT);
+    toastT = setTimeout(function () { if (toastEl) toastEl.remove(); }, 2600);
+  }
+
+  /* ---------- resume modal ---------- */
+  var modal = document.getElementById("modal"), lastFocus = null;
+  function openResume() { lastFocus = document.activeElement; modal.hidden = false; document.body.style.overflow = "hidden"; document.getElementById("closeresume").focus(); }
+  function closeResume() { modal.hidden = true; document.body.style.overflow = ""; if (lastFocus && lastFocus.focus) lastFocus.focus(); }
+  document.querySelectorAll("[data-open-resume]").forEach(function (b) { b.addEventListener("click", openResume); });
+  document.getElementById("closeresume").addEventListener("click", closeResume);
+  modal.addEventListener("click", function (e) { if (e.target === modal) closeResume(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !modal.hidden) closeResume(); });
+
+  /* ---------- resume download (needs the downloads capability) ---------- */
+  function pdfBytes() {
+    var bin = atob(PDF_B64), arr = new Uint8Array(bin.length);
+    for (var i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
+    return arr;
+  }
+  function wireDownload(dl) {
+    document.querySelectorAll("[data-download]").forEach(function (b) {
+      b.hidden = false;
+      b.addEventListener("click", function () {
+        dl.save({ filename: "Gampa_Aravind_Resume.pdf", data: pdfBytes() }).then(
+          function () { toast("Resume saved"); },
+          function (err) { if (err && err.code === "declined") return; toast("Download is not available here"); }
+        );
+      });
+    });
+  }
+  try {
+    if (window.claude && window.claude.use) {
+      window.claude.use("downloads").then(function (dl) { if (dl) wireDownload(dl); }, function () {});
+    }
+  } catch (e) {}
+
+  /* ---------- email copy ---------- */
+  document.getElementById("copymail").addEventListener("click", function () {
+    var b = this;
+    function ok() { b.textContent = "Copied"; setTimeout(function () { b.textContent = "Copy"; }, 1400); }
+    function sel() { var r = document.createRange(); r.selectNodeContents(document.getElementById("mailtxt")); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = "Selected"; }
+    try { navigator.clipboard.writeText(EMAIL).then(ok, sel); } catch (e) { sel(); }
+  });
+
+  /* ---------- t-code command field ---------- */
+  var TC = [
+    ["FB60", "Enter Incoming Invoice", "Post a vendor invoice to Accounts Payable."],
+    ["FB50", "Enter G/L Account Document", "Post a general ledger accounting entry."],
+    ["F110", "Automatic Payment Transactions", "Run vendor payments and process open items."],
+    ["F150", "Dunning", "Send reminders for overdue customer items."],
+    ["FBL1N", "Vendor Line Item Display", "Review open and cleared vendor items."],
+    ["FAGLB03", "G/L Account Balance Display", "Check balances for reconciliation and reporting."]
+  ];
+  var listEl = document.getElementById("tclist"), tcText = document.getElementById("tctext"), tcName = document.getElementById("tcname"), tcDesc = document.getElementById("tcdesc");
+  TC.forEach(function (t) { var s = document.createElement("span"); s.className = "tc"; s.textContent = t[0]; listEl.appendChild(s); });
+  var tcEls = listEl.children, idx = 0;
+  function show(i) {
+    for (var k = 0; k < tcEls.length; k++) tcEls[k].classList.toggle("on", k === i);
+    tcName.textContent = TC[i][1]; tcDesc.textContent = TC[i][2];
+  }
+  function typeNext() {
+    var code = TC[idx][0], n = 0;
+    if (reduce) { tcText.textContent = code; show(idx); idx = (idx + 1) % TC.length; setTimeout(typeNext, 2600); return; }
+    tcText.textContent = "";
+    (function step() {
+      if (n <= code.length) { tcText.textContent = "/n" + code.slice(0, n); n++; setTimeout(step, 120); }
+      else { show(idx); setTimeout(function () {
+        var m = code.length + 2;
+        (function del() { if (m > 0) { tcText.textContent = ("/n" + code).slice(0, --m); setTimeout(del, 40); } else { idx = (idx + 1) % TC.length; setTimeout(typeNext, 250); } })();
+      }, 2000); }
+    })();
+  }
+  show(0); typeNext();
+
+  /* ---------- counters ---------- */
+  function count(el) {
+    var to = +el.getAttribute("data-count"), suf = el.getAttribute("data-suffix") || "";
+    if (reduce) { el.textContent = to + suf; return; }
+    var t0 = performance.now(), dur = 1200;
+    (function f(t) { var p = Math.min(1, (t - t0) / dur), e = 1 - Math.pow(1 - p, 3); el.textContent = Math.round(to * e) + (p === 1 ? suf : ""); if (p < 1) requestAnimationFrame(f); })(t0);
+  }
+
+  /* ---------- scroll reveal ---------- */
+  var ledger = document.getElementById("ledger");
+  var els = document.querySelectorAll(".rv");
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add("seen");
+        if (e.target === ledger) ledger.classList.add("on");
+        e.target.querySelectorAll("[data-count]").forEach(count);
+        io.unobserve(e.target);
+      });
+    }, { threshold: 0.18 });
+    els.forEach(function (el) { io.observe(el); });
+  } else {
+    els.forEach(function (el) { el.classList.add("seen"); el.querySelectorAll("[data-count]").forEach(count); });
+    ledger.classList.add("on");
+  }
+
+  /* ---------- scroll progress + active nav ---------- */
+  var prog = document.getElementById("prog"), links = document.querySelectorAll("#navlinks a"), secs = [];
+  links.forEach(function (a) { var s = document.querySelector(a.getAttribute("href")); if (s) secs.push([a, s]); });
+  var ticking = false;
+  function onScroll() {
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    prog.style.transform = "scaleX(" + (h > 0 ? Math.min(1, window.scrollY / h) : 0) + ")";
+    var cur = null, y = window.innerHeight * 0.35;
+    secs.forEach(function (p) { if (p[1].getBoundingClientRect().top < y) cur = p[0]; });
+    links.forEach(function (a) { a.classList.toggle("act", a === cur); });
+    ticking = false;
+  }
+  window.addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+  onScroll();
+
+  /* ---------- tile tilt + glow ---------- */
+  document.querySelectorAll(".proc").forEach(function (c) {
+    c.addEventListener("mousemove", function (e) {
+      var r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      c.style.setProperty("--mx", (x * 100) + "%"); c.style.setProperty("--my", (y * 100) + "%");
+      if (!reduce) c.style.transform = "perspective(700px) rotateX(" + ((0.5 - y) * 6) + "deg) rotateY(" + ((x - 0.5) * 8) + "deg) translateY(-4px)";
+    });
+    c.addEventListener("mouseleave", function () { c.style.transform = ""; });
+  });
+
+  /* ---------- falling t-code background ---------- */
+  var cv = document.getElementById("rain");
+  if (cv && !reduce) {
+    var ctx = cv.getContext("2d"), W = 0, H = 0, cols = [], words = ["FB60", "F110", "FB50", "F150", "FBL1N", "KR", "DR", "SA", "1000", "FAGLB03", "AP", "AR", "GL", "11,800", "0001"];
+    var vis = true, last = 0;
+    function size() {
+      var r = cv.getBoundingClientRect(); W = cv.width = Math.max(1, r.width); H = cv.height = Math.max(1, r.height);
+      var n = Math.floor(W / 90); cols = [];
+      for (var i = 0; i < n; i++) cols.push({ x: i * 90 + 20 + Math.random() * 30, y: Math.random() * H, v: 14 + Math.random() * 26, w: words[(Math.random() * words.length) | 0] });
+    }
+    function draw(t) {
+      requestAnimationFrame(draw);
+      if (!vis || t - last < 40) return; var dt = (t - last) / 1000; last = t;
+      ctx.clearRect(0, 0, W, H); ctx.font = "12px IBM Plex Mono, monospace"; ctx.fillStyle = "#62c0ff";
+      cols.forEach(function (c) {
+        c.y += c.v * dt; if (c.y > H + 20) { c.y = -20; c.w = words[(Math.random() * words.length) | 0]; }
+        ctx.globalAlpha = 0.18 + 0.3 * (1 - c.y / H > 0 ? 1 - c.y / H : 0); ctx.fillText(c.w, c.x, c.y);
+      });
+    }
+    size(); window.addEventListener("resize", size); requestAnimationFrame(draw);
+    if ("IntersectionObserver" in window) new IntersectionObserver(function (e) { vis = e[0].isIntersecting; }).observe(cv);
+  }
+})();
+</script>
+
+</body></html>
