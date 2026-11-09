@@ -59,11 +59,22 @@ nav {
 .links a:hover, .links a.act { color: var(--fg); border-color: var(--accent); }
 .nbtn { border: 1px solid var(--accent); background: transparent; color: var(--fg); border-radius: 999px; padding: 7px 14px; font: 500 13px var(--f-body); cursor: pointer; transition: background .2s; }
 .nbtn:hover { background: var(--glow); }
-@media (max-width: 760px) { .links { display: none; } }
+a.nbtn { text-decoration: none; }
+.menu { display: none; align-items: center; justify-content: center; width: 40px; height: 36px; border: 1px solid var(--line); border-radius: 8px; background: transparent; color: var(--fg); cursor: pointer; }
+.menu svg { width: 20px; height: 20px; }
+.navr { display: flex; align-items: center; gap: 8px; }
+@media (max-width: 760px) {
+  .menu { display: inline-flex; }
+  .links { display: none; }
+  .links.open { display: flex; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; gap: 0; background: var(--bg2); border: 1px solid var(--line); border-top: 0; border-radius: 0 0 12px 12px; padding: 4px 18px; box-shadow: 0 20px 40px rgba(0,0,0,.4); }
+  .links.open a { padding: 14px 0; font-size: 16px; border-bottom: 1px solid var(--line); }
+  .links.open a:last-child { border-bottom: 0; }
+}
 
 /* hero */
 .hero { position: relative; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 32px; align-items: center; padding-block: 56px 56px; }
 .hero > * { min-width: 0; }
+@media (max-width: 860px) { .hero { grid-template-columns: 1fr; padding-block: 36px 40px; gap: 36px; } .lede { font-size: 16px; } }
 .bgfx { position: absolute; top: -40px; bottom: 0; left: 50%; width: 100vw; margin-left: -50vw; z-index: -1; overflow: hidden; pointer-events: none;
   background: radial-gradient(60% 70% at 78% 40%, var(--glow), transparent 70%); }
 .bgfx::before { content: ""; position: absolute; inset: 0;
@@ -249,9 +260,12 @@ section { padding-block: 72px; border-top: 1px solid var(--line); margin-top: 56
 .contact { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: end; }
 @media (max-width: 760px) { .contact { grid-template-columns: 1fr; } }
 .contact h2 { font-size: clamp(34px, 6vw, 64px); font-weight: 800; }
+.reach { display: grid; gap: 12px; justify-items: start; }
 .mail { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font: 15px var(--f-mono); }
-.mail a { color: var(--accent2); text-decoration: none; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; }
-.mail a:hover { border-color: var(--accent2); }
+.mail a, .li a { color: var(--accent2); text-decoration: none; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; }
+.mail a:hover, .li a:hover { border-color: var(--accent2); }
+.li { font: 15px var(--f-mono); }
+.li a { text-decoration: none; border-bottom: 1px solid var(--line); overflow-wrap: anywhere; }
 .copy { font: 12px var(--f-mono); background: none; color: var(--accent2); border: 1px solid var(--line); border-radius: 5px; padding: 4px 10px; cursor: pointer; }
 .copy:hover { border-color: var(--accent); }
 footer.end { padding-block: 28px; border-top: 1px solid var(--line); color: var(--muted); font: 12px var(--f-mono); display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
@@ -299,15 +313,18 @@ footer.end { padding-block: 28px; border-top: 1px solid var(--line); color: var(
     <div class="links" id="navlinks">
       <a href="#about">About</a><a href="#process">Processes</a><a href="#skills">Skills</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#resume">Resume</a><a href="#contact">Contact</a>
     </div>
-    <button class="nbtn" type="button" data-open-resume>View resume</button>
+    <div class="navr">
+      <button class="nbtn" type="button" data-open-resume>View resume</button>
+      <button class="menu" type="button" id="menubtn" aria-label="Open menu" aria-expanded="false" aria-controls="navlinks"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
     <div class="prog" id="prog"></div>
   </nav>
 
   <header class="hero" id="top">
     <div class="bgfx" aria-hidden="true"><canvas id="rain"></canvas></div>
     <div>
-      <div class="eyebrow in" style="--d:0"> Hyderabad, India</div>
-      <h1 class="in" style="--d:1">Gampa <span class="hl">Aravind</span></h1>
+      <div class="eyebrow in" style="--d:0">Hyderabad, India</div>
+      <h1 class="in" style="--d:1"><span class="hl">Gampa Aravind</span></h1>
       <div class="role in" style="--d:2"><span>SAP Finance (FICO)</span><i class="bar"></i><span>Finance &amp; Reporting Analyst</span></div>
       <p class="lede in" style="--d:3">Two years of SAP Finance work in a live client environment: postings, payment runs, dunning and expense support, backed by solid training across GL, AP, AR and S/4HANA Finance.</p>
       <div class="cta in" style="--d:4">
@@ -315,7 +332,7 @@ footer.end { padding-block: 28px; border-top: 1px solid var(--line); color: var(
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
           View resume
         </button>
-        <button class="btn sec" type="button" data-download hidden>
+        <button class="btn sec" type="button" data-download>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>
           Download resume
         </button>
@@ -487,7 +504,7 @@ footer.end { padding-block: 28px; border-top: 1px solid var(--line); color: var(
       </div>
       <div class="cta">
         <button class="btn pri" type="button" data-open-resume>View resume</button>
-        <button class="btn sec" type="button" data-download hidden>Download PDF</button>
+        <button class="btn sec" type="button" data-download>Download PDF</button>
       </div>
     </div>
   </section>
@@ -499,7 +516,10 @@ footer.end { padding-block: 28px; border-top: 1px solid var(--line); color: var(
         <h2 style="margin-top:12px">Let's connect.</h2>
         <p style="color:var(--muted);max-width:46ch;margin:14px 0 0">Based in Hyderabad, India. Write to me about SAP Finance (FICO) work, support projects or reporting.</p>
       </div>
-      <div class="mail"><a href="mailto:Aravindgampa7075@gmail.com" id="mailtxt">Aravindgampa7075@gmail.com</a><button class="copy" type="button" id="copymail">Copy</button></div>
+      <div class="reach">
+        <div class="mail"><a href="mailto:Aravindgampa7075@gmail.com" id="mailtxt">Aravindgampa7075@gmail.com</a><button class="copy" type="button" id="copymail">Copy</button></div>
+        <div class="li"><a href="https://www.linkedin.com/in/aravind-g-5aa105264/" target="_blank" rel="noopener">linkedin.com/in/aravind-g-5aa105264</a></div>
+      </div>
     </div>
   </section>
 
@@ -510,7 +530,7 @@ footer.end { padding-block: 28px; border-top: 1px solid var(--line); color: var(
   <div class="sheet">
     <div class="sheet-bar">
       <strong>Gampa_Aravind_Resume.pdf</strong>
-      <button class="btn pri" type="button" data-download hidden>
+      <button class="btn pri" type="button" data-download>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>
         Download
       </button>
@@ -560,6 +580,8 @@ footer.end { padding-block: 28px; border-top: 1px solid var(--line); color: var(
 <script>
 var PDF_B64 = "JVBERi0xLjQKJZOMi54gUmVwb3J0TGFiIEdlbmVyYXRlZCBQREYgZG9jdW1lbnQgKG9wZW5zb3VyY2UpCjEgMCBvYmoKPDwKL0YxIDIgMCBSIC9GMiAzIDAgUgo+PgplbmRvYmoKMiAwIG9iago8PAovQmFzZUZvbnQgL0hlbHZldGljYSAvRW5jb2RpbmcgL1dpbkFuc2lFbmNvZGluZyAvTmFtZSAvRjEgL1N1YnR5cGUgL1R5cGUxIC9UeXBlIC9Gb250Cj4+CmVuZG9iagozIDAgb2JqCjw8Ci9CYXNlRm9udCAvSGVsdmV0aWNhLUJvbGQgL0VuY29kaW5nIC9XaW5BbnNpRW5jb2RpbmcgL05hbWUgL0YyIC9TdWJ0eXBlIC9UeXBlMSAvVHlwZSAvRm9udAo+PgplbmRvYmoKNCAwIG9iago8PAovQ29udGVudHMgOCAwIFIgL01lZGlhQm94IFsgMCAwIDU5NS4yNzU2IDg0MS44ODk4IF0gL1BhcmVudCA3IDAgUiAvUmVzb3VyY2VzIDw8Ci9Gb250IDEgMCBSIC9Qcm9jU2V0IFsgL1BERiAvVGV4dCAvSW1hZ2VCIC9JbWFnZUMgL0ltYWdlSSBdCj4+IC9Sb3RhdGUgMCAvVHJhbnMgPDwKCj4+IAogIC9UeXBlIC9QYWdlCj4+CmVuZG9iago1IDAgb2JqCjw8Ci9QYWdlTW9kZSAvVXNlTm9uZSAvUGFnZXMgNyAwIFIgL1R5cGUgL0NhdGFsb2cKPj4KZW5kb2JqCjYgMCBvYmoKPDwKL0F1dGhvciAoR2FtcGEgQXJhdmluZCkgL0NyZWF0aW9uRGF0ZSAoRDoyMDI2MTAyODA5MDkxMiswMCcwMCcpIC9DcmVhdG9yIChcKHVuc3BlY2lmaWVkXCkpIC9LZXl3b3JkcyAoKSAvTW9kRGF0ZSAoRDoyMDI2MTAyODA5MDkxMiswMCcwMCcpIC9Qcm9kdWNlciAoUmVwb3J0TGFiIFBERiBMaWJyYXJ5IC0gXChvcGVuc291cmNlXCkpIAogIC9TdWJqZWN0IChcKHVuc3BlY2lmaWVkXCkpIC9UaXRsZSAoR2FtcGEgQXJhdmluZCAtIFJlc3VtZSkgL1RyYXBwZWQgL0ZhbHNlCj4+CmVuZG9iago3IDAgb2JqCjw8Ci9Db3VudCAxIC9LaWRzIFsgNCAwIFIgXSAvVHlwZSAvUGFnZXMKPj4KZW5kb2JqCjggMCBvYmoKPDwKL0ZpbHRlciBbIC9BU0NJSTg1RGVjb2RlIC9GbGF0ZURlY29kZSBdIC9MZW5ndGggMTkxMgo+PgpzdHJlYW0KR2F1YFQ/JCMhYCdSZi5HZ250WUgnIUVUIylvJ3A3K15uIkwkaFMzXTA4YjFxV2JZNzZhWDU4K0lzYWFFMyRxITJHTyRcMjBGPiYxXiNwSC9IUi9fT2ZLZFUqLWpCQmMiN04saiNfZ00qJkQocjIxUGEpTHBVKk5iLm03V20hPV0+MF9pWmhJNDlBQzZxcUFBbWYtLS5iKDlwSGgmWzgySTp1WyZbcDN0Y3NXRjkmYVYhcmgqSlgta3MxQkBCU243RVApXC1kX1IvTyFGVGpxJCpsRGRZZyY1K1JATT8tQjRATzdtZSFUZzlnKHE0PHBES0deTEc1Zl1jaTJaUlhTcVh1VENbPiJUQD5mKV41LTZlLFRyY0MnNF10OGcwbEA0M2UvJ09nM1xfJzRzPVJyOVoyRExAVWBtWTxvZkFRK2JVbUZYYStFai5VWiVvKGQiY0lXLkRnUG0+XnNIQDZFVyRUSEBlVkRwXmVEXDohTCxuRHMvTmQ1NkgrK1FgKjhPPmJkW1EwJikzPz1gLzgqWityYjpLXzRGc3U3W0ArZzZTJlMqNFRaXlBZTDEocWxBOVBCJ08zO3E3XGE+bzJDLE1VL0hSU3UlPWttLUV0MzVrNnBPQC1wUXFyOGwiJUshaChIUSlYRklzcCQhNG1WYyUvQUlNYGFOIUMrNS9mbjdZaEdrOTp0aUg8UEtbT3E0S0tRXCRPUWFSZF9DWFBsNmM2RGNUXCNKYFBbPCNqLj0+WDNAZz5WUmtAZkZFRmkqMGtlVShSWW0naS9oMzlNJjZsPjZOY29iN18uMklsOV8wSmxXZCNkS2dOX1ZGTyE5ampERnJkSSRyL04nSlZgOk9ZUzQtZS9DMmAmTEJsVm5kNU9NUUlKSEhONDViRFkoJj1EXSwzZE03QyFLOEwqXzFVcFBESSQ+VFdqSl8/ZnUqbkQhNnIhX2ZnRl89YDBMM2FAPm42blBvXCwxYClZZTZqWHBSNmAxLUgiSFhLX0JQPHFiQltYRjtcVjVDUS8halQpVlBNJjljUDVeQEU6T2syQ1F0dF4tWj1oUDs5dF89Uk5Ea2VwOk9aX25eMFRrISg7PUkoUGlfcVBXIm9eMjxzNm9HYlM5XTlEMTEpcEYuOiRrP2oocydHKm9RcjtGNWh0Oj9ZPi1oSlc2YjFkP2pvYC1RM0lHSSdZRGA4WU44TTtmXyJIaSU1KE4xNyU6OVYwWEFERCYxXGtsSj1qODpPbllBU2JqQkkjVzRkWlkrQmVpPHNJOjY/PStqO186SjMtRzg8ZyI+OC9ML1BdS0tEZGg7XSQzb1UlJUZcaC1mamE3ZC5TU0s5dVxJV0VUUDM8MmBbJGtjZXFZWE1bJDI/dEBrZ21LWF1nITA/RU1rNFBHKzMtTiZvXW1pUCJzIVkqYTw4VGNnZycnUlE5KGcuT3JJcyJYJTphPEVbQS5kRFhSYy03aU1Pc01HJElWJFtOaj1MREs+YiVCQVUsKWYlMm9kVTNfbk5gVj0hdEJKY2UyTUhIa1o3InJvdE1RMV5wbUc/MFBiME8xJD0oWFVRPl1KN0YtbGVDa2FLQypKYVwsZFlhciYwNTAqZG89QFFCY0FRY3NIU1BQZlxjMFUvZ2prPCM5RUEnT1BpK1shZzY8LVtQOmA+R0NhMGx0LV88LW8/SFtVNWVlNGR1bHJBVkw4Mk5iS0ZKLjZXSVsuLid1XFUiM0hmbCNINjYvaDlMVF1XclooVzhbbE5sLC9hUG9CWS4pM0ojV2s7cyNAW1AsS15ASF9STkttMnQ2NXJMYUxXIVZKXVs7MlhUMjhhISNwUVNLRkRUZVMwVmAmKC1KJzoqOWQqQEBXUm1gYmo0cCFJX3FwPUAzMmIwLHU/LHVLQFldZT5VJmlTJCFSI0E4OyFTI0RsbTtrcjg/TWMvYV9hZEZrUy9lJSZjJksrWk8pdFVCRFFGLGE5cUxWMjo9c2VyK2ZSZ1otZShKLDQyOGhxbihmK1BHJD41Ok1paTVFTU5kQ3Q7QnFmZSFlJiFEaUFYWUBEIkNpPUUuR2IwYSgwKTsoWCZHIVpTMGBzIUIzbFhNWCEyOjspYHVQNUxXSElOV1E8LFBSRUVlNV5bRCU4MmBiQ1NyL09JJWBrOUFyY3NbSTJUcGw3JChOYzAwaj5MWWdaPUU+bmJkVTA7IUJHZCVSXSlib2lKWHRGN0ddQVdzJCxyVkM4Wj5BaGRFZl5oNHMtXUdsdEgpcy4lQSJlW09NZihfQjdOblVzc2pDQXUjTWJyZTZzcnU/Jm1UUVwvbm0xLlssai5nVjsnL3NJOzw6bFVBZldvcCU4aWpURyVgZE9gYWoiVzFiTFEiI2FgdTpvIylxOV0zRmxrZFNdWiZTJjdJJiIlLXBVTEInXyomUUA/ZiI/cy9mYlcpZnE2Vzc4KD1TWzFZZjZgNC1uaDZta0spMylvYWkkTjFUQ3UqO2duIVEwSUEtdWdRTk5WZ1E7TipkcV8raGhuUFdBI3EiIlk2QjxWbzNHazZgN2IwdC9TYmFGYDorS0FHPil+PmVuZHN0cmVhbQplbmRvYmoKeHJlZgowIDkKMDAwMDAwMDAwMCA2NTUzNSBmIAowMDAwMDAwMDYxIDAwMDAwIG4gCjAwMDAwMDAxMDIgMDAwMDAgbiAKMDAwMDAwMDIwOSAwMDAwMCBuIAowMDAwMDAwMzIxIDAwMDAwIG4gCjAwMDAwMDA1MjQgMDAwMDAgbiAKMDAwMDAwMDU5MiAwMDAwMCBuIAowMDAwMDAwODgxIDAwMDAwIG4gCjAwMDAwMDA5NDAgMDAwMDAgbiAKdHJhaWxlcgo8PAovSUQgCls8OTIwZjUwZDNhMGFmN2FkMjcyZDliODA4ZmI5NmFhOGQ+PDkyMGY1MGQzYTBhZjdhZDI3MmQ5YjgwOGZiOTZhYThkPl0KJSBSZXBvcnRMYWIgZ2VuZXJhdGVkIFBERiBkb2N1bWVudCAtLSBkaWdlc3QgKG9wZW5zb3VyY2UpCgovSW5mbyA2IDAgUgovUm9vdCA1IDAgUgovU2l6ZSA5Cj4+CnN0YXJ0eHJlZgoyOTQzCiUlRU9GCg==";
 var EMAIL = "Aravindgampa7075@gmail.com";
+/* Paste the GitHub link to the resume PDF here. Keep the same file name when you replace the file and this page always opens the latest copy. */
+var RESUME_URL = "";
 (function () {
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -587,22 +609,38 @@ var EMAIL = "Aravindgampa7075@gmail.com";
     for (var i = 0; i < bin.length; i++) arr[i] = bin.charCodeAt(i);
     return arr;
   }
-  function wireDownload(dl) {
-    document.querySelectorAll("[data-download]").forEach(function (b) {
-      b.hidden = false;
-      b.addEventListener("click", function () {
-        dl.save({ filename: "Gampa_Aravind_Resume.pdf", data: pdfBytes() }).then(
-          function () { toast("Resume saved"); },
-          function (err) { if (err && err.code === "declined") return; toast("Download is not available here"); }
-        );
-      });
+  var dlRef = null;
+  document.querySelectorAll("[data-download]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      if (!dlRef) { openResume(); toast("Downloads are off in this view. Use the link on the GitHub page."); return; }
+      dlRef.save({ filename: "Gampa_Aravind_Resume.pdf", data: pdfBytes() }).then(
+        function () { toast("Resume saved"); },
+        function (err) { if (err && err.code === "declined") return; toast("Download is not available here"); }
+      );
     });
-  }
+  });
   try {
     if (window.claude && window.claude.use) {
-      window.claude.use("downloads").then(function (dl) { if (dl) wireDownload(dl); }, function () {});
+      window.claude.use("downloads").then(function (dl) { if (dl) dlRef = dl; }, function () {});
     }
   } catch (e) {}
+
+  /* when a GitHub link is set, both buttons become plain links to the live file */
+  if (RESUME_URL) {
+    document.querySelectorAll("[data-open-resume], [data-download]").forEach(function (b) {
+      var a = document.createElement("a");
+      a.className = b.className; a.innerHTML = b.innerHTML;
+      a.href = RESUME_URL; a.target = "_blank"; a.rel = "noopener";
+      b.parentNode.replaceChild(a, b);
+    });
+  }
+
+  /* ---------- mobile menu ---------- */
+  var menuBtn = document.getElementById("menubtn"), navLinks = document.getElementById("navlinks");
+  menuBtn.addEventListener("click", function () {
+    var o = navLinks.classList.toggle("open"); menuBtn.setAttribute("aria-expanded", o ? "true" : "false");
+  });
+  navLinks.addEventListener("click", function (e) { if (e.target.tagName === "A") { navLinks.classList.remove("open"); menuBtn.setAttribute("aria-expanded", "false"); } });
 
   /* ---------- email copy ---------- */
   document.getElementById("copymail").addEventListener("click", function () {
